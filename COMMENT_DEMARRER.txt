@@ -1,0 +1,102 @@
+================================================================================
+                    COMMENT DEMARRER L'API
+================================================================================
+
+ETAPE 1: DEMARRER L'API
+------------------------
+
+Methode 1 (Recommandee):
+  Double-cliquez sur: start_api.bat
+
+Methode 2:
+  Ouvrez un terminal dans ce dossier et tapez:
+  python api.py
+
+IMPORTANT: Laissez la fenetre ouverte! Ne la fermez pas!
+
+
+ETAPE 2: ATTENDRE LE DEMARRAGE
+-------------------------------
+
+Vous verrez ce message:
+  "Application startup complete."
+  "Uvicorn running on http://127.0.0.1:8000"
+
+
+ETAPE 3: OUVRIR VOTRE NAVIGATEUR
+---------------------------------
+
+Ouvrez l'une de ces URLs dans votre navigateur:
+  
+  http://localhost:8000
+  OU
+  http://127.0.0.1:8000
+
+Pour la documentation interactive:
+  http://localhost:8000/docs
+
+
+ETAPE 4: TESTER L'API
+---------------------
+
+Dans un NOUVEAU terminal (gardez l'API ouverte), executez:
+  python verifier_api.py
+
+OU testez avec:
+  python test_api.py
+
+
+================================================================================
+                        PROBLEMES COURANTS
+================================================================================
+
+PROBLEME: "localhost a refuse de se connecter"
+SOLUTION: L'API n'est pas demarree. Retournez a l'ETAPE 1.
+
+PROBLEME: "Port 8000 already in use"
+SOLUTION: Le port est deja utilise. Fermez l'autre application ou changez
+          le port dans api.py (ligne finale).
+
+PROBLEME: "Module not found"
+SOLUTION: Installez les dependances:
+          pip install -r requirements.txt
+
+PROBLEME: N'utilisez PAS http://0.0.0.0:8000
+SOLUTION: Utilisez http://localhost:8000 ou http://127.0.0.1:8000
+
+
+================================================================================
+                        ARRETER L'API
+================================================================================
+
+Dans le terminal ou l'API tourne:
+  Appuyez sur CTRL+C
+
+OU fermez simplement la fenetre du terminal.
+
+
+================================================================================
+                        VERIFICATION RAPIDE
+================================================================================
+
+1. L'API est-elle demarree?
+   Executez: python verifier_api.py
+
+2. Les modules fonctionnent-ils?
+   Executez: python quick_test.py
+
+3. Tout fonctionne?
+   Executez: python test_api.py
+
+
+================================================================================
+                        URLS IMPORTANTES
+================================================================================
+
+API principale:       http://localhost:8000
+Documentation:        http://localhost:8000/docs
+Documentation alt:    http://localhost:8000/redoc
+Health check:         http://localhost:8000/health
+
+
+================================================================================

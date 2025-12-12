@@ -1,0 +1,44 @@
+================================================================================
+                    COMMENT ACCEDER A L'API
+================================================================================
+
+QUAND VOUS VOYEZ CE MESSAGE:
+  "Uvicorn running on http://0.0.0.0:8000"
+
+N'UTILISEZ PAS: http://0.0.0.0:8000 (ne fonctionne pas!)
+
+================================================================================
+                    UTILISEZ CES URLS
+================================================================================
+
+✓ http://localhost:8000
+✓ http://127.0.0.1:8000
+
+Documentation:
+✓ http://localhost:8000/docs
+✓ http://127.0.0.1:8000/docs
+
+================================================================================
+                    POURQUOI 0.0.0.0 NE FONCTIONNE PAS?
+================================================================================
+
+0.0.0.0 est une adresse speciale qui signifie "ecouter sur toutes les interfaces"
+C'est pour le serveur, pas pour le navigateur.
+
+Pour acceder a l'API, utilisez toujours:
+  - localhost
+  - 127.0.0.1
+  - Votre IP locale (ex: 192.168.1.x)
+
+================================================================================
+                    TESTER L'API
+================================================================================
+
+1. Ouvrez votre navigateur
+2. Allez sur: http://localhost:8000
+3. Vous devriez voir la page d'accueil de l'API
+
+Pour la documentation interactive:
+  http://localhost:8000/docs
+
+================================================================================

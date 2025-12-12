@@ -1,0 +1,49 @@
+================================================================================
+                    MODIFICATIONS DES PARAMETRES
+================================================================================
+
+CHANGEMENT EFFECTUE:
+
+AVANT:
+  - Temperature
+  - Humidite du sol
+  - Lumiere
+  - pH du sol
+
+MAINTENANT:
+  - Temperature
+  - Humidite du sol
+  - Humidite de l'air (NOUVEAU)
+  - Lumiere
+
+================================================================================
+                    FICHIERS MODIFIES
+================================================================================
+
+✓ main.py - Conditions optimales et fonction get_recommendations
+✓ sensors_data.csv - Donnees d'entrainement avec air_humidity
+✓ api.py - Modele Pydantic et endpoints
+✓ database.py - Structure des tables
+✓ quick_test.py - Tests mis a jour
+
+================================================================================
+                    NOUVEAU FORMAT DES DONNEES
+================================================================================
+
+Exemple de requete:
+{
+  "seed_type": "tomate",
+  "temperature": 25,
+  "soil_humidity": 75,
+  "air_humidity": 70,
+  "light_level": 11
+}
+
+================================================================================
+                    IMPORTANT
+================================================================================
+
+La base de donnees a ete recreee avec la nouvelle structure.
+Vous devez REDEMARRER l'API pour utiliser les nouveaux parametres.
+
+================================================================================

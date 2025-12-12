@@ -1,0 +1,107 @@
+================================================================================
+                    8 NOUVELLES SEMENCES AJOUTEES !
+================================================================================
+
+Votre API supporte maintenant 10 types de semences au lieu de 2 !
+
+ANCIENNES SEMENCES (2):
+  1. Mais
+  2. Riz
+
+NOUVELLES SEMENCES AJOUTEES (8):
+  3. Ble
+  4. Soja
+  5. Tomate
+  6. Haricot
+  7. Carotte
+  8. Laitue
+  9. Concombre
+  10. Poivron
+
+================================================================================
+                    COMMENT UTILISER LES NOUVELLES SEMENCES
+================================================================================
+
+IMPORTANT: Vous devez REDEMARRER l'API pour charger les nouvelles semences!
+
+Methode 1 (Recommandee):
+  Double-cliquez sur: redemarrer_api.bat
+
+Methode 2:
+  1. Arretez l'API actuelle (CTRL+C dans le terminal)
+  2. Redemarrez avec: python api.py
+
+================================================================================
+                    TESTER LES 10 SEMENCES
+================================================================================
+
+Une fois l'API redemarree, executez:
+  python test_10_semences.py
+
+Ou testez manuellement dans le navigateur:
+  http://localhost:8000/docs
+
+================================================================================
+                    EXEMPLE D'UTILISATION
+================================================================================
+
+Test avec la tomate:
+--------------------
+import requests
+
+response = requests.post("http://localhost:8000/predict", json={
+    "seed_type": "tomate",
+    "temperature": 25,
+    "soil_humidity": 75,
+    "light_level": 11,
+    "pH_du_sol": 6.4
+})
+
+print(response.json())
+
+
+Test avec la laitue:
+--------------------
+response = requests.post("http://localhost:8000/predict", json={
+    "seed_type": "laitue",
+    "temperature": 15,
+    "soil_humidity": 70,
+    "light_level": 6,
+    "pH_du_sol": 6.5
+})
+
+print(response.json())
+
+================================================================================
+                    FICHIERS MODIFIES
+================================================================================
+
+1. main.py
+   - Ajout de 8 nouveaux types de semences dans OPTIMAL_CONDITIONS
+
+2. sensors_data.csv
+   - Ajout de 24 nouvelles lignes de donnees d'entrainement
+   - 3 exemples par semence (bonnes, moyennes, mauvaises conditions)
+
+3. Nouveaux fichiers:
+   - test_10_semences.py : Test automatique des 10 semences
+   - LISTE_SEMENCES.txt : Liste complete avec conditions optimales
+   - redemarrer_api.bat : Script pour redemarrer l'API
+
+================================================================================
+                    PROCHAINES ETAPES
+================================================================================
+
+1. REDEMARRER L'API:
+   Double-cliquez sur: redemarrer_api.bat
+
+2. TESTER:
+   python test_10_semences.py
+
+3. CONSULTER LA LISTE:
+   Ouvrez: LISTE_SEMENCES.txt
+
+4. UTILISER L'API:
+   http://localhost:8000/docs
+
+================================================================================

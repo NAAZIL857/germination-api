@@ -1,0 +1,53 @@
+================================================================================
+                    INSTRUCTIONS DE REDEMARRAGE
+================================================================================
+
+Les fichiers ont ete mis a jour avec 10 types de semences !
+
+AVANT (2 semences):
+  - mais
+  - riz
+
+MAINTENANT (10 semences):
+  - mais, riz, ble, soja, tomate
+  - haricot, carotte, laitue, concombre, poivron
+
+================================================================================
+                    REDEMARRER L'API MAINTENANT
+================================================================================
+
+METHODE 1 (Recommandee):
+  Double-cliquez sur: REDEMARRER_MAINTENANT.bat
+
+METHODE 2 (Manuel):
+  1. Dans le terminal ou l'API tourne, appuyez sur CTRL+C
+  2. Attendez l'arret complet
+  3. Executez: python api.py
+
+================================================================================
+                    APRES LE REDEMARRAGE
+================================================================================
+
+1. Verifiez que l'API affiche:
+   "10 types de semences supportes"
+
+2. Testez les nouvelles semences:
+   python test_10_semences.py
+
+3. Consultez la documentation:
+   http://localhost:8000/docs
+
+4. Testez dans le navigateur:
+   http://localhost:8000
+   (Vous devriez voir "semences_supportees": 10)
+
+================================================================================
+                    FICHIERS MIS A JOUR
+================================================================================
+
+✓ main.py              - 8 nouvelles semences ajoutees
+✓ sensors_data.csv     - 24 nouvelles lignes de donnees
+✓ api.py               - Version 2.0.0, affichage des 10 semences
+✓ README_API.md        - Documentation mise a jour
+
+================================================================================

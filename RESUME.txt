@@ -1,0 +1,150 @@
+================================================================================
+  PROJET: API DE PREDICTION DE GERMINATION DES GRAINES
+================================================================================
+
+STATUT: ✅ PRET A L'EMPLOI
+
+================================================================================
+FICHIERS CREES
+================================================================================
+
+1. main.py              - Modele IA et logique de prediction
+2. database.py          - Gestion base de donnees SQLite
+3. api.py               - API REST avec FastAPI
+4. sensors_data.csv     - Donnees d'entrainement
+5. requirements.txt     - Dependances Python
+
+6. start_api.bat        - Script de demarrage rapide (Windows)
+7. quick_test.py        - Test rapide des modules
+8. test_api.py          - Tests automatises de l'API
+9. example_client.py    - Exemple d'utilisation client
+
+10. README_API.md       - Documentation complete de l'API
+11. GUIDE_DEMARRAGE.md  - Guide de demarrage rapide
+
+================================================================================
+DEMARRAGE RAPIDE
+================================================================================
+
+1. INSTALLER LES DEPENDANCES:
+   pip install -r requirements.txt
+
+2. TESTER LES MODULES:
+   python quick_test.py
+
+3. DEMARRER L'API:
+   python api.py
+   OU
+   start_api.bat
+
+4. ACCEDER A L'API:
+   - API: http://localhost:8000
+   - Documentation: http://localhost:8000/docs
+
+5. TESTER L'API:
+   python test_api.py
+   OU
+   python example_client.py
+
+================================================================================
+ENDPOINTS PRINCIPAUX
+================================================================================
+
+POST   /predict                  - Prediction + recommandations
+POST   /recommendations          - Recommandations uniquement
+GET    /conditions/{seed_type}   - Conditions optimales
+POST   /sensor-data              - Ajouter des donnees
+GET    /predictions              - Historique des predictions
+GET    /stats/{seed_type}        - Statistiques
+GET    /health                   - Etat de l'API
+
+================================================================================
+BASE DE DONNEES
+================================================================================
+
+Fichier: germination.db (cree automatiquement)
+
+Tables:
+- sensor_data   : Donnees des capteurs
+- predictions   : Historique des predictions
+
+================================================================================
+EXEMPLE D'UTILISATION
+================================================================================
+
+Python:
+-------
+import requests
+
+response = requests.post("http://localhost:8000/predict", json={
+    "seed_type": "mais",
+    "temperature": 25,
+    "soil_humidity": 70,
+    "light_level": 8,
+    "pH_du_sol": 6.2
+})
+
+result = response.json()
+print(f"Score: {result['predicted_score']}")
+
+curl:
+-----
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d "{\"seed_type\":\"mais\",\"temperature\":25,\"soil_humidity\":70,\"light_level\":8,\"pH_du_sol\":6.2}"
+
+================================================================================
+TYPES DE GRAINES SUPPORTES
+================================================================================
+
+- mais  : Mais
+- riz   : Riz
+
+================================================================================
+INTEGRATION AVEC D'AUTRES SYSTEMES
+================================================================================
+
+L'API peut etre integree avec:
+- Applications web (React, Vue, Angular)
+- Applications mobiles (React Native, Flutter)
+- Systemes IoT (Arduino, Raspberry Pi, ESP32)
+- Dashboards (Grafana, Tableau)
+- Automatisation (Node-RED, Home Assistant)
+
+================================================================================
+DOCUMENTATION
+================================================================================
+
+- README_API.md         : Documentation complete de l'API
+- GUIDE_DEMARRAGE.md    : Guide de demarrage detaille
+- http://localhost:8000/docs : Documentation interactive (Swagger)
+
+================================================================================
+TESTS EFFECTUES
+================================================================================
+
+✅ Module principal (main.py)
+✅ Base de donnees (database.py)
+✅ Predictions
+✅ Dependances de l'API
+
+================================================================================
+PROCHAINES ETAPES
+================================================================================
+
+1. Demarrer l'API: python api.py
+2. Tester avec: python test_api.py
+3. Consulter la documentation: http://localhost:8000/docs
+4. Integrer avec votre systeme
+
+================================================================================
+SUPPORT
+================================================================================
+
+Pour toute question:
+- Consultez README_API.md
+- Consultez GUIDE_DEMARRAGE.md
+- Testez avec example_client.py
+- Documentation interactive: http://localhost:8000/docs
+
+================================================================================

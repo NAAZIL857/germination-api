@@ -1,0 +1,85 @@
+================================================================================
+                    LISTE DES 10 TYPES DE SEMENCES
+================================================================================
+
+1. MAIS
+   - Temperature: 18-30°C
+   - Humidite: 60-80%
+   - Lumiere: 6-10h/jour
+   - pH: 5.5-7.0
+
+2. RIZ
+   - Temperature: 20-35°C
+   - Humidite: 70-90%
+   - Lumiere: 5-9h/jour
+   - pH: 5.0-7.0
+
+3. BLE
+   - Temperature: 15-25°C
+   - Humidite: 50-70%
+   - Lumiere: 6-10h/jour
+   - pH: 6.0-7.5
+
+4. SOJA
+   - Temperature: 20-30°C
+   - Humidite: 60-75%
+   - Lumiere: 7-12h/jour
+   - pH: 6.0-7.0
+
+5. TOMATE
+   - Temperature: 20-30°C
+   - Humidite: 65-85%
+   - Lumiere: 8-14h/jour
+   - pH: 6.0-6.8
+
+6. HARICOT
+   - Temperature: 18-28°C
+   - Humidite: 60-80%
+   - Lumiere: 6-10h/jour
+   - pH: 6.0-7.0
+
+7. CAROTTE
+   - Temperature: 15-25°C
+   - Humidite: 55-75%
+   - Lumiere: 5-8h/jour
+   - pH: 5.5-7.0
+
+8. LAITUE
+   - Temperature: 10-20°C
+   - Humidite: 60-80%
+   - Lumiere: 4-8h/jour
+   - pH: 6.0-7.0
+
+9. CONCOMBRE
+   - Temperature: 20-30°C
+   - Humidite: 70-90%
+   - Lumiere: 8-12h/jour
+   - pH: 6.0-7.0
+
+10. POIVRON
+    - Temperature: 22-30°C
+    - Humidite: 65-85%
+    - Lumiere: 8-14h/jour
+    - pH: 6.0-6.8
+
+================================================================================
+                    UTILISATION AVEC L'API
+================================================================================
+
+Exemple de requete pour chaque semence:
+
+POST http://localhost:8000/predict
+
+Body JSON:
+{
+  "seed_type": "tomate",
+  "temperature": 25,
+  "soil_humidity": 75,
+  "light_level": 11,
+  "pH_du_sol": 6.4
+}
+
+Valeurs possibles pour seed_type:
+  mais, riz, ble, soja, tomate, haricot, carotte, laitue, concombre, poivron
+
+================================================================================
