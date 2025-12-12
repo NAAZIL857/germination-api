@@ -43,7 +43,7 @@ POST /predict
   "temperature": 25,
   "soil_humidity": 75,
   "air_humidity": 70,
-  "light_level": 11
+  "light_level": 65
 }
 ```
 
@@ -82,7 +82,7 @@ POST /sensor-data
   "temperature": 22,
   "soil_humidity": 65,
   "air_humidity": 60,
-  "light_level": 7,
+  "light_level": 50,
   "germination_score": 90
 }
 ```
@@ -119,7 +119,7 @@ python test_api.py
 ```bash
 curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: application/json" \
-  -d '{"seed_type":"mais","temperature":25,"soil_humidity":70,"air_humidity":60,"light_level":8}'
+  -d '{"seed_type":"mais","temperature":25,"soil_humidity":70,"air_humidity":60,"light_level":60}'
 ```
 
 ### Avec Python:
@@ -132,7 +132,7 @@ response = requests.post("http://localhost:8000/predict", json={
     "temperature": 25,
     "soil_humidity": 75,
     "air_humidity": 70,
-    "light_level": 11
+    "light_level": 65
 })
 
 print(response.json())
@@ -143,7 +143,7 @@ response = requests.post("http://localhost:8000/predict", json={
     "temperature": 15,
     "soil_humidity": 70,
     "air_humidity": 60,
-    "light_level": 6
+    "light_level": 40
 })
 
 print(response.json())
@@ -151,16 +151,16 @@ print(response.json())
 
 ## 📝 Types de Graines Supportés (10)
 
-- **mais**: Maïs (18-30°C, sol 60-80%, air 50-70%, 6-10h lumière)
-- **riz**: Riz (20-35°C, sol 70-90%, air 60-80%, 5-9h lumière)
-- **ble**: Blé (15-25°C, sol 50-70%, air 40-60%, 6-10h lumière)
-- **soja**: Soja (20-30°C, sol 60-75%, air 50-70%, 7-12h lumière)
-- **tomate**: Tomate (20-30°C, sol 65-85%, air 60-80%, 8-14h lumière)
-- **haricot**: Haricot (18-28°C, sol 60-80%, air 50-70%, 6-10h lumière)
-- **carotte**: Carotte (15-25°C, sol 55-75%, air 45-65%, 5-8h lumière)
-- **laitue**: Laitue (10-20°C, sol 60-80%, air 50-70%, 4-8h lumière)
-- **concombre**: Concombre (20-30°C, sol 70-90%, air 60-80%, 8-12h lumière)
-- **poivron**: Poivron (22-30°C, sol 65-85%, air 60-80%, 8-14h lumière)
+- **mais**: Maïs (18-30°C, sol 60-80%, air 50-70%, lumière 43-71%)
+- **riz**: Riz (20-35°C, sol 70-90%, air 60-80%, lumière 36-64%)
+- **ble**: Blé (15-25°C, sol 50-70%, air 40-60%, lumière 43-71%)
+- **soja**: Soja (20-30°C, sol 60-75%, air 50-70%, lumière 50-86%)
+- **tomate**: Tomate (20-30°C, sol 65-85%, air 60-80%, lumière 57-100%)
+- **haricot**: Haricot (18-28°C, sol 60-80%, air 50-70%, lumière 43-71%)
+- **carotte**: Carotte (15-25°C, sol 55-75%, air 45-65%, lumière 36-57%)
+- **laitue**: Laitue (10-20°C, sol 60-80%, air 50-70%, lumière 29-57%)
+- **concombre**: Concombre (20-30°C, sol 70-90%, air 60-80%, lumière 57-86%)
+- **poivron**: Poivron (22-30°C, sol 65-85%, air 60-80%, lumière 57-100%)
 
 ## 🔧 Configuration
 
@@ -185,11 +185,18 @@ L'API valide automatiquement:
 - `temperature`: -10°C à 50°C
 - `soil_humidity`: 0% à 100%
 - `air_humidity`: 0% à 100%
-- `light_level`: 0h à 24h
+- `light_level`: 0% à 100%
 
 ## 📊 Paramètres des Capteurs
 
 - **temperature**: Température ambiante en °C
 - **soil_humidity**: Humidité du sol en %
 - **air_humidity**: Humidité de l'air en %
-- **light_level**: Heures d'exposition à la lumière par jour
+- **light_level**: Niveau de luminosité en % (0-100) - mesuré par photo-résistance/LDR
+
+## 🔄 Conversion Interne
+
+L'API convertit automatiquement le pourcentage de luminosité en heures équivalentes pour le modèle :
+- 0% = 0h (obscurité)
+- 50% = 7h (luminosité moyenne)
+- 100% = 14h (luminosité maximale)

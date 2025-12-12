@@ -1,0 +1,87 @@
+================================================================================
+                    MODIFICATION: LIGHT_LEVEL EN POURCENTAGE
+================================================================================
+
+CHANGEMENT EFFECTUE:
+
+AVANT:
+  light_level = heures d'exposition (0-24h)
+
+MAINTENANT:
+  light_level = pourcentage de luminosite (0-100%)
+
+================================================================================
+                    NOUVEAU FORMAT
+================================================================================
+
+Exemple de requete:
+{
+  "seed_type": "tomate",
+  "temperature": 25,
+  "soil_humidity": 75,
+  "air_humidity": 70,
+  "light_level": 65
+}
+
+light_level = 65% (mesure directe du LDR/photo-resistance)
+
+================================================================================
+                    CONVERSION INTERNE
+================================================================================
+
+L'API convertit automatiquement le pourcentage en heures equivalentes:
+
+light_hours = (light_percent / 100) * 14
+
+Exemples:
+  - 0% = 0h (obscurite totale)
+  - 50% = 7h (luminosite moyenne)
+  - 100% = 14h (luminosite maximale)
+
+================================================================================
+                    VALIDATION
+================================================================================
+
+✓ light_level: 0-100 (pourcentage)
+✓ temperature: -10 a 50°C
+✓ soil_humidity: 0-100%
+✓ air_humidity: 0-100%
+
+================================================================================
+                    RECOMMANDATIONS
+================================================================================
+
+Les recommandations affichent maintenant des pourcentages:
+
+Exemple:
+  "[LUMIERE] Insuffisante (30%). Ideal: 43-71%"
+
+Au lieu de:
+  "[LUMIERE] Insuffisante. Ideal: 6-10h/jour"
+
+================================================================================
+                    COMPATIBILITE IOT
+================================================================================
+
+✓ Compatible avec photo-resistance (LDR)
+✓ Compatible avec capteurs de luminosite analogiques
+✓ Valeur normalisee 0-100%
+✓ Pas de conversion necessaire cote backend Node.js
+
+================================================================================
+                    FICHIERS MODIFIES
+================================================================================
+
+✓ main.py - Fonction de conversion + logique de recommandations
+✓ api.py - Validation 0-100 au lieu de 0-24
+✓ quick_test.py - Exemples mis a jour
+
+================================================================================
+                    TESTS
+================================================================================
+
+✓ Tous les tests passent
+✓ Conversion fonctionne correctement
+✓ Predictions coherentes
+
+================================================================================

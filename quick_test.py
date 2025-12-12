@@ -38,7 +38,7 @@ try:
         'temperature': 25,
         'soil_humidity': 70,
         'air_humidity': 60,
-        'light_level': 8
+        'light_level': 60
     }
     score = predict_score(model, model_columns, data)
     recs = get_recommendations(**data)

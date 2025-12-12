@@ -2,6 +2,13 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
+def light_percent_to_hours(light_percent):
+    """
+    Convertit un pourcentage de luminosité (0-100%) en heures équivalentes (0-14h)
+    Basé sur une journée maximale de 14h de lumière
+    """
+    return (light_percent / 100) * 14
+
 # --- Base de connaissances des conditions optimales ---
 OPTIMAL_CONDITIONS = {
     'mais': {
@@ -112,10 +119,13 @@ def get_recommendations(seed_type, temperature, soil_humidity, air_humidity, lig
         temperature: Température en °C
         soil_humidity: Humidité du sol en %
         air_humidity: Humidité de l'air en %
-        light_level: Niveau de lumière en heures/jour
+        light_level: Niveau de lumière en % (0-100)
     """
     if seed_type not in OPTIMAL_CONDITIONS:
         return [f"[ERREUR] Type de graine '{seed_type}' non reconnu."]
+
+    # Convertir le pourcentage de lumière en heures équivalentes
+    light_hours = light_percent_to_hours(light_level)
 
     conditions = OPTIMAL_CONDITIONS[seed_type]
     recommendations = []
@@ -134,10 +144,14 @@ def get_recommendations(seed_type, temperature, soil_humidity, air_humidity, lig
         recommendations.append(f"[HUMIDITE] Sol trop humide. Ideal: {min_hum}-{max_hum}%")
 
     min_light, max_light = conditions['light_level']
-    if light_level < min_light:
-        recommendations.append(f"[LUMIERE] Insuffisante. Ideal: {min_light}-{max_light}h/jour.")
-    elif light_level > max_light:
-        recommendations.append(f"[LUMIERE] Excessive. Ideal: {min_light}-{max_light}h/jour.")
+    if light_hours < min_light:
+        min_percent = int((min_light / 14) * 100)
+        max_percent = int((max_light / 14) * 100)
+        recommendations.append(f"[LUMIERE] Insuffisante ({light_level}%). Ideal: {min_percent}-{max_percent}%")
+    elif light_hours > max_light:
+        min_percent = int((min_light / 14) * 100)
+        max_percent = int((max_light / 14) * 100)
+        recommendations.append(f"[LUMIERE] Excessive ({light_level}%). Ideal: {min_percent}-{max_percent}%")
 
     min_air, max_air = conditions['air_humidity']
     if air_humidity < min_air:
@@ -155,8 +169,13 @@ def predict_score(model, model_columns, data):
     Prépare les données pour la prédiction en s'assurant que les colonnes correspondent
     à celles utilisées pour l'entraînement.
     """
+    # Convertir light_level de % en heures pour le modèle
+    data_copy = data.copy()
+    if 'light_level' in data_copy:
+        data_copy['light_level'] = light_percent_to_hours(data_copy['light_level'])
+    
     # Crée un DataFrame pour les nouvelles données
-    df = pd.DataFrame([data])
+    df = pd.DataFrame([data_copy])
     # Applique le One-Hot Encoding
     df_encoded = pd.get_dummies(df)
     # Réaligne les colonnes sur celles du modèle, en ajoutant les colonnes manquantes avec 0
@@ -178,7 +197,7 @@ if __name__ == "__main__":
         'temperature': 16, 
         'soil_humidity': 55,
         'air_humidity': 45,
-        'light_level': 4
+        'light_level': 30
     }
     
     score_mais = predict_score(model, model_columns, data_mais)
@@ -196,7 +215,7 @@ if __name__ == "__main__":
         'temperature': 28, 
         'soil_humidity': 80,
         'air_humidity': 70,
-        'light_level': 7
+        'light_level': 50
     }
     
     score_riz = predict_score(model, model_columns, data_riz)

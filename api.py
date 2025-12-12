@@ -35,7 +35,7 @@ class SensorInput(BaseModel):
     temperature: float = Field(..., ge=-10, le=50, description="Température en °C")
     soil_humidity: float = Field(..., ge=0, le=100, description="Humidité du sol en %")
     air_humidity: float = Field(..., ge=0, le=100, description="Humidité de l'air en %")
-    light_level: float = Field(..., ge=0, le=24, description="Heures de lumière par jour")
+    light_level: float = Field(..., ge=0, le=100, description="Niveau de luminosité en % (0-100)")
 
     class Config:
         json_schema_extra = {
@@ -44,7 +44,7 @@ class SensorInput(BaseModel):
                 "temperature": 25,
                 "soil_humidity": 75,
                 "air_humidity": 70,
-                "light_level": 11
+                "light_level": 65
             }
         }
 
